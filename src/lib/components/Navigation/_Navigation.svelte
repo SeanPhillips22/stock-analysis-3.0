@@ -175,11 +175,11 @@
 	}
 
 	.hide-nav {
-		@apply block xxl:hidden fixed h-[calc(100%-50px)] xxl:h-0 shadow-lg xxl:shadow-none;
+		@apply block xxl:hidden fixed h-[calc(100%-50px)] xxl:h-0 shadow-2xl xxl:shadow-none;
 	}
 
 	.nav-col {
-		@apply bg-white top-16 xxl:sticky xxl:px-5 py-4;
+		@apply bg-white top-16 xxl:sticky px-3 xxl:px-5 py-4;
 	}
 
 	nav {
@@ -207,7 +207,7 @@
 	}
 
 	.nav-label {
-		@apply ml-3 xxl:ml-2.5 xxxl:ml-3;
+		@apply ml-3;
 	}
 
 	.collapsed .nav-label {

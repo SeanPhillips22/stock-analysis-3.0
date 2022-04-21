@@ -18,6 +18,7 @@ const config = {
 		},
 		extend: {
 			gridTemplateColumns: {
+				sidebar: 'minmax(0, 1fr) 300px',
 				leftnav: 'auto minmax(0, 1fr)',
 			},
 			colors: {

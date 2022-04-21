@@ -37,10 +37,10 @@
 
 <style>
 	.mainbody {
-		@apply grow xxl:grid xxl:max-w-[1420px] xxl:grid-cols-leftnav xxl:gap-x-1 xxxl:gap-x-2;
+		@apply grow xxl:grid xxl:grid-cols-leftnav gap-x-0;
 	}
 
 	main {
-		@apply mx-auto mb-10 w-full xl:max-w-screen-xl xxl:mx-0 px-3 py-5 xs:px-4 xs:py-6 lg:px-6;
+		@apply mx-auto mb-10 w-full;
 	}
 </style>
