@@ -1,15 +1,19 @@
 <script context="module">
-	export async function load({ stuff }) {
+	export async function load({ params, fetch, stuff }) {
+		let symbol = params.symbol
+
+		const res = await fetch(`https://api.stockanalysis.com/wp-json/sa/overview?symbol=${symbol}&t=stocks`)
+		const data = await res.json()
+
 		return {
-			props: {
-				info: stuff.info
-			}
+			props: { info: stuff, data }
 		}
 	}
 </script>
 
 <script>
 	export let info
+	export let data
 </script>
 
 <svelte:head>
@@ -18,7 +22,4 @@
 
 <h1>Overview</h1>
 
-<ul>
-	<li><a href="/stocks/{info.symbol}/financials/">Financials</a></li>
-	<li><a href="/stocks/{info.symbol}/statistics/">Statistics</a></li>
-</ul>
+<div>Overview: {JSON.stringify(data)}</div>

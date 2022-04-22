@@ -25,9 +25,4 @@
 
 <h1>Financials</h1>
 
-<ul>
-	<li><a href="/stocks/{i.symbol}/">Overview</a></li>
-	<li><a href="/stocks/{i.symbol}/statistics/">Statistics</a></li>
-</ul>
-
 <div>Financials: {JSON.stringify(data)}</div>

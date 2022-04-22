@@ -1,5 +1,6 @@
 <script>
 	import Quote from './PriceQuote.svelte'
+	import StockNav from './Nav/StockNav.svelte'
 	export let info
 </script>
 
@@ -10,11 +11,13 @@
 	</div>
 
 	<Quote quote={info.quote} />
+
+	<StockNav {info} />
 </div>
 
 <style>
 	.container {
-		@apply mx-auto;
+		@apply mx-auto mb-2;
 	}
 
 	.stock-head {

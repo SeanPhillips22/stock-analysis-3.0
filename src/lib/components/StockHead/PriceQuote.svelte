@@ -1,4 +1,7 @@
 <script>
+	// Display the stock price quote, for either a stock or ETF
+	// It's either one or two blocks depending on whether extended hour
+	// trading info is available
 	import SunIcon from '$lib/icons/Sun.svelte'
 	import MoonIcon from '$lib/icons/Moon.svelte'
 
@@ -33,7 +36,6 @@
 	{#if quote.e}
 		<div class="ext split">
 			<div class="p-ext">{quote.epd}</div>
-			{' '}
 			<div class="pc-ext {extendedColor}">{quote.ec} ({quote.ecp}%)</div>
 			<div class="und">
 				<span class="sp1">
