@@ -21,6 +21,12 @@ const config = {
 				sidebar: 'minmax(0, 1fr) 300px',
 				leftnav: 'auto minmax(0, 1fr)',
 			},
+			fontSize: {
+				smaller: ['0.95rem', '1.35rem'],
+				small: ['0.9rem', '1.3rem'],
+				tiny: ['0.8rem', '1.15rem'],
+				xxs: ['0.7rem', '0.9rem']
+			},
 			colors: {
 				blue: {
 					brand_sharp: 'rgba(44, 98, 136)',

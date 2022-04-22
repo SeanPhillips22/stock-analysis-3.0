@@ -22,11 +22,18 @@
 			NProgress.done()
 		}
 	}
+
+	// Get the global state for showing and hiding the navigation
+	import { navigationOpen } from '$lib/stores/navigation'
+	let showNavigation
+	navigationOpen.subscribe((value) => {
+		showNavigation = value
+	})
 </script>
 
 <Header />
 
-<div class="mainbody">
+<div class:mainbody={showNavigation}>
 	<Navigation />
 	<main>
 		<slot />
