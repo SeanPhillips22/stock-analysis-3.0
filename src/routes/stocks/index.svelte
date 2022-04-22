@@ -1,30 +1,34 @@
 <script>
+	import Table from '$lib/components/Tables/SimpleTable.svelte'
 	export let data
 </script>
 
 <h1>All Stock Symbols</h1>
 
 <div class="container">
-	<table>
-		<thead>
-			<tr>
-				<th>Symbol</th>
-				<th>Company Name</th>
-				<th>Industry</th>
-				<th>Market Cap</th>
-			</tr>
-		</thead>
-		<tbody>
-			{#each data as stock (stock.s)}
-				<tr>
-					<td><a href="/stocks/{stock.s.toLowerCase()}/">{stock.s}</a></td>
-					<td>{stock.n}</td>
-					<td>{stock.i}</td>
-					<td>{stock.m}</td>
-				</tr>
-			{/each}
-		</tbody>
-	</table>
+	<Table
+		{data}
+		columns={[
+			{
+				id: 's',
+				title: 'Symbol',
+				format: 'symbol'
+			},
+			{
+				id: 'n',
+				title: 'Company Name'
+			},
+			{
+				id: 'i',
+				title: 'Industry'
+			},
+			{
+				id: 'm',
+				title: 'Market',
+				format: 'abbreviate'
+			}
+		]}
+	/>
 </div>
 
 <style>

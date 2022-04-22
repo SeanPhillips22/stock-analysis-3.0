@@ -12,7 +12,12 @@ body > div {
 }
 
 a {
-	@apply text-blue-600 hover:text-black;		
+	@apply text-blue-link hover:text-gray-900;
+	color: #1e73ba;
+}
+
+a:hover {
+	color: #111827;
 }
 
 h1 {
