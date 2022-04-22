@@ -10,7 +10,7 @@
 		<div class="details">{info.exchange}: {info.ticker} · IEX Real-Time Price · USD</div>
 	</div>
 
-	<Quote quote={info.quote} />
+	<Quote {info} />
 
 	<StockNav {info} />
 </div>

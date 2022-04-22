@@ -6,12 +6,15 @@
 		const data = await res.json()
 
 		return {
-			props: { info: stuff, data }
+			props: { info: stuff.info, data: data.data.data }
 		}
 	}
 </script>
 
 <script>
+	import InfoTable from '../../../lib/components/Pages/Overview/TopTableInfo.svelte'
+	import QuoteTable from '../../../lib/components/Pages/Overview/TopTableQuote.svelte'
+
 	export let info
 	export let data
 </script>
@@ -20,6 +23,12 @@
 	<title>{info.nameFull} ({info.ticker}) Stock Price, Quote & News</title>
 </svelte:head>
 
-<h1>Overview</h1>
-
-<div>Overview: {JSON.stringify(data)}</div>
+<div class="mt-4 flex-row gap-4 lg:flex">
+	<div class="order-3 grow overflow-auto">
+		<div class="bg-gray-100 grow h-full w-full border border-gray-200" />
+	</div>
+	<div class="order-1 flex flex-row gap-4">
+		<InfoTable {data} />
+		<QuoteTable {data} {info} />
+	</div>
+</div>

@@ -2,10 +2,36 @@
 	// Display the stock price quote, for either a stock or ETF
 	// It's either one or two blocks depending on whether extended hour
 	// trading info is available
+	import { onMount, onDestroy } from 'svelte'
 	import SunIcon from '$lib/icons/Sun.svelte'
 	import MoonIcon from '$lib/icons/Moon.svelte'
 
-	export let quote
+	export let info
+
+	// Replace react query with own
+	// When component is mounted, create an interval to fetch the
+	// stock price every 5 seconds
+	let refetch
+	let freshQuote
+	onMount(() => {
+		refetch = setInterval(async () => {
+			try {
+				const resB = await fetch(`https://api.stockanalysis.com/wp-json/sa/p?s=${info.symbol}&t=stocks`)
+				const dataB = await resB.json()
+				freshQuote = dataB
+			} catch (e) {
+				clearInterval(refetch)
+			}
+		}, 5000)
+	})
+
+	// When component is unmounted, stop the interval
+	onDestroy(() => {
+		clearInterval(refetch)
+	})
+
+	// info.quote is used as the initialdata until freshQuote has been set
+	$: quote = freshQuote ? freshQuote : info.quote
 
 	// Set the change color based on the change in price
 	let color
@@ -22,7 +48,9 @@
 <div class="container">
 	<div class:extended={quote.e}>
 		<div class="p">{quote.pd}</div>
-		<div class="pc {color}">{quote.c} ({quote.cp}%)</div>
+		{#key quote.c}
+			<div class="pc {color}">{quote.c} ({quote.cp}%)</div>
+		{/key}
 
 		<!-- Change timestamp slightly if there is an extended hours quote -->
 		{#if quote.e}
