@@ -12,8 +12,9 @@
 </script>
 
 <script>
-	import InfoTable from '../../../lib/components/Pages/Overview/TopTableInfo.svelte'
-	import QuoteTable from '../../../lib/components/Pages/Overview/TopTableQuote.svelte'
+	import PriceChart from '$lib/components/Pages/Overview/PriceChart/_PriceChart.svelte'
+	import InfoTable from '$lib/components/Pages/Overview/TopTableInfo.svelte'
+	import QuoteTable from '$lib/components/Pages/Overview/TopTableQuote.svelte'
 
 	export let info
 	export let data
@@ -25,7 +26,7 @@
 
 <div class="mt-4 flex-row gap-4 lg:flex">
 	<div class="order-3 grow overflow-auto">
-		<div class="bg-gray-100 grow h-full w-full border border-gray-200" />
+		<PriceChart {info} />
 	</div>
 	<div class="order-1 flex flex-row gap-4">
 		<InfoTable {data} />

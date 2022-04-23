@@ -1,6 +1,6 @@
 <svg
 	xmlns="http://www.w3.org/2000/svg"
-	class="text-blue-400"
+	class="h-4 w-4 inline text-blue-400"
 	fill="none"
 	viewBox="0 0 24 24"
 	stroke="currentColor"
