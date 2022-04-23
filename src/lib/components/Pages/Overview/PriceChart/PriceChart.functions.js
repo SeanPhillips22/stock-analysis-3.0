@@ -15,20 +15,6 @@ export async function fetchChartData(symbol, type, time) {
 	}
 }
 
-// Make API url
-export function getChartUrl(symbol, type, time) {
-	const params = `s=${symbol}&t=${type}&r=${time}&m=1`
-
-	let apiurl
-	if (time === '5Y' || time === 'MAX') {
-		apiurl = `chart?${params}&p=w`
-	} else {
-		apiurl = `chart?${params}`
-	}
-
-	return apiurl
-}
-
 // Turn the 1D/5D into a human-friendly string
 export function translateTime(time) {
 	switch (time) {
