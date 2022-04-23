@@ -1,34 +1,29 @@
 <script>
 	import { browser } from '$app/env'
-	import { onMount } from 'svelte'
+	import { fetchChartData } from './PriceChart.functions'
 	import Controls from './PriceChartControls.svelte'
 	import Change from './PriceChartChange.svelte'
 	import Chart from './PriceChartChart.svelte'
 	export let info
 
 	let chartTime = '1D'
+	let chartData
 
-	let data
-	onMount(async () => {
-		try {
-			const res = await fetch(
-				`https://api.stockanalysis.com/wp-json/sa/chart?s=${info.symbol}&t=stocks&r=${chartTime}&m=1`
-			)
-			data = await res.json()
-		} catch (e) {
-			console.error(e)
-		}
-	})
+	async function fetchData(time) {
+		chartData = await fetchChartData(info.symbol, info.type, time)
+	}
+
+	$: fetchData(chartTime)
 </script>
 
 <div class="container">
 	<div class="controls">
-		<Controls {chartTime} />
+		<Controls bind:time={chartTime} />
 		<Change {info} {chartTime} />
 	</div>
 	<div class="chart-wrap">
-		{#if browser && data}
-			<Chart {data} time={chartTime} change={info.quote.c} />
+		{#if browser && chartData}
+			<Chart {chartData} time={chartTime} change={info.quote.c} />
 		{/if}
 	</div>
 </div>
@@ -40,5 +35,9 @@
 
 	.controls {
 		@apply flex items-center justify-between py-1 sm:pt-0.5;
+	}
+
+	.chart-wrap {
+		@apply h-[250px] sm:h-[300px];
 	}
 </style>

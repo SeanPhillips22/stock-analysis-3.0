@@ -1,44 +1,44 @@
 <script>
-	export let chartTime
+	export let time
 </script>
 
 <div>
 	<ul class="price-controls">
 		<li>
-			<button class:active={chartTime === '1D'} on:click={() => (chartTime = '1D')}>
+			<button class:active={time === '1D'} on:click={() => (time = '1D')}>
 				<span>1D</span>
 				<span>1 Day</span>
 			</button>
 		</li>
 		<li>
-			<button class:active={chartTime === '5D'} on:click={() => (chartTime = '5D')}>
+			<button class:active={time === '5D'} on:click={() => (time = '5D')}>
 				<span>5D</span>
 				<span>5 Days</span>
 			</button>
 		</li>
 		<li>
-			<button class:active={chartTime === '1M'} on:click={() => (chartTime = '1M')}>
+			<button class:active={time === '1M'} on:click={() => (time = '1M')}>
 				<span>1M</span>
 				<span>1 Month</span>
 			</button>
 		</li>
 		<li>
-			<button class:active={chartTime === 'YTD'} on:click={() => (chartTime = 'YTD')}>YTD</button>
+			<button class:active={time === 'YTD'} on:click={() => (time = 'YTD')}>YTD</button>
 		</li>
 		<li>
-			<button class:active={chartTime === '1Y'} on:click={() => (chartTime = '1Y')}>
+			<button class:active={time === '1Y'} on:click={() => (time = '1Y')}>
 				<span>1Y</span>
 				<span>1 Year</span>
 			</button>
 		</li>
 		<li>
-			<button class:active={chartTime === '5Y'} on:click={() => (chartTime = '5Y')}>
+			<button class:active={time === '5Y'} on:click={() => (time = '5Y')}>
 				<span>5Y</span>
 				<span>5 Years</span>
 			</button>
 		</li>
 		<li>
-			<button class:active={chartTime === 'MAX'} on:click={() => (chartTime = 'MAX')}>Max</button>
+			<button class:active={time === 'MAX'} on:click={() => (time = 'MAX')}>Max</button>
 		</li>
 	</ul>
 </div>

@@ -1,3 +1,20 @@
+// Fetch chart data
+export async function fetchChartData(symbol, type, time) {
+	let params = `chart?s=${symbol}&t=${type}&r=${time}&m=1`
+
+	if (time === '5Y' || time === 'MAX') {
+		params += '&p=w'
+	}
+	try {
+		const res = await fetch(
+			'https://api.stockanalysis.com/wp-json/sa/' + params,
+		)
+		return await res.json()
+	} catch (e) {
+		console.error(e)
+	}
+}
+
 // Make API url
 export function getChartUrl(symbol, type, time) {
 	const params = `s=${symbol}&t=${type}&r=${time}&m=1`

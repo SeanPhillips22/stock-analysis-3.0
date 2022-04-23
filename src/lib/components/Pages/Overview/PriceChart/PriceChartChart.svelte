@@ -1,24 +1,34 @@
 <script>
-	import { onMount, onDestroy } from 'svelte'
+	/*
+	 * Import and render the stock price charts
+	 * TODO add the "previous close" line -- it's not showing for some reason
+	 * TODO make it so that the axes don't update until the data has updated
+	 * TODO fix the chart color so that it changes also for other than 1D
+	 */
+	import { onMount, afterUpdate, onDestroy } from 'svelte'
 	import { formatPriceChartTicks, formatPriceChartTime, setPriceChartColor } from './PriceChart.functions'
 
 	export let time
 	export let change
-	export let data
+	export let chartData
+	$: data = chartData
 
 	let chartDiv
 
+	//
 	const handleResize = () => {
-		let width = ref.current.clientWidth
-		let height = ref.current.clientHeight
+		let width = chartDiv.clientWidth
+		let height = chartDiv.clientHeight
 		chart.applyOptions({ width, height })
 		chart.timeScale().fitContent()
 	}
 
-	onMount(async () => {
+	// Render the chart
+	let chart
+	async function renderChart() {
+		if (typeof chart !== 'undefined') chart.remove()
 		const { createChart, LineStyle } = await import('lightweight-charts')
-		console.log(data)
-		const chart = createChart(chartDiv, {
+		chart = createChart(chartDiv, {
 			layout: {
 				fontFamily:
 					"system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'",
@@ -87,16 +97,9 @@
 			lineWidth: 2
 		})
 
-		// Configure the "Previous Close" line and label
-		const lastPrice = data[data.length - 1]?.c
-		// let showPriceLineTitle =
-		// 	lastPrice && close && (lastPrice > Number(close) * 1.002 || lastPrice < Number(close) * 0.998)
-
-		//@ts-ignore
 		const plOptions = time === '1D' && {
 			price: Number(close),
 			axisLabelVisible: false, // showPriceLineTitle,
-			// title: 'Prev. close',
 			color: 'rgb(100, 100, 100)',
 			lineStyle: LineStyle.SparseDotted
 		}
@@ -115,14 +118,20 @@
 		//@ts-ignore
 		areaSeries.setData(format)
 
-		window.addEventListener('resize', handleResize)
-
 		chart.timeScale().fitContent()
+	}
+
+	onMount(() => {
+		window.addEventListener('resize', handleResize)
+	})
+
+	afterUpdate(async () => {
+		renderChart()
 	})
 
 	onDestroy(() => {
 		window.removeEventListener('resize', handleResize)
-		chart.remove()
+		if (typeof chart !== 'undefined') chart.remove()
 	})
 </script>
 
